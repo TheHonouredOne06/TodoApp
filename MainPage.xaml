@@ -1,0 +1,58 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoApp.MainPage"
+             BackgroundColor="Black"
+             Title="Todo List">
+
+    <VerticalStackLayout Padding="20">
+
+        <!-- Entry and Add Button -->
+        <HorizontalStackLayout Spacing="10">
+            <Entry x:Name="TaskEntry" Placeholder="Enter a new task..." HorizontalOptions="FillAndExpand" BackgroundColor="white" TextColor="black"/>
+            <Button Text="Add" Clicked="OnAddClicked" />
+        </HorizontalStackLayout>
+
+        <!-- List of Tasks -->
+        <CollectionView ItemsSource="{Binding Tasks}" Margin="0,20,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <!-- Number -->
+                            <ColumnDefinition Width="Auto" />
+                            <!-- Checkbox -->
+                            <ColumnDefinition Width="*" />
+                            <!-- Task Name -->
+                            <ColumnDefinition Width="Auto" />
+                            <!-- Delete Button -->
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Task Number -->
+                        <Label Text="{Binding Number}" 
+                               TextColor="LightGray"
+                               VerticalOptions="Center"
+                               FontAttributes="Bold"/>
+
+                        <!-- Checkbox -->
+                        <CheckBox IsChecked="{Binding IsCompleted}" Grid.Column="1" VerticalOptions="Center"/>
+
+                        <!-- Task Name -->
+                        <Label Text="{Binding Name}" Grid.Column="2"
+                               VerticalOptions="Center"
+                               TextColor="White"/>
+
+                        <!-- Delete Button -->
+                        <Button Text="🗑" Grid.Column="3"
+                                CommandParameter="{Binding .}"
+                                Clicked="OnDeleteClicked"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
+
+
+
